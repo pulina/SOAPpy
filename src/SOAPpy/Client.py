@@ -258,8 +258,9 @@ class HTTPTransport:
 
         # read response line
         code, msg, headers = r.getreply()
-
-        self.cookies = Cookie.SimpleCookie();
+        
+        if not self.cookies:
+            self.cookies = Cookie.SimpleCookie();
         if headers:
             content_type = headers.get("content-type","text/xml")
             content_length = headers.get("Content-length")
